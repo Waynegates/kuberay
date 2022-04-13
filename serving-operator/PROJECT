@@ -1,0 +1,16 @@
+domain: io
+layout:
+- go.kubebuilder.io/v3
+projectName: serving-operator
+repo: github.com/ray-project/kuberay
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: io
+  group: ray
+  kind: ServingCluster
+  path: github.com/ray-project/kuberay/api/v1alpha1
+  version: v1alpha1
+version: "3"
