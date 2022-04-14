@@ -16212,7 +16212,9 @@ spec:
                           type: object
                         runtime_env:
                           additionalProperties:
-                            type: string
+                            items:
+                              type: string
+                            type: array
                           type: object
                       type: object
                     route_prefix:

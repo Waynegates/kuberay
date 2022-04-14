@@ -31,9 +31,17 @@ func (in *RayActorOptionSpec) DeepCopyInto(out *RayActorOptionSpec) {
 	*out = *in
 	if in.RuntimeEnv != nil {
 		in, out := &in.RuntimeEnv, &out.RuntimeEnv
-		*out = make(map[string]string, len(*in))
+		*out = make(map[string][]string, len(*in))
 		for key, val := range *in {
-			(*out)[key] = val
+			var outVal []string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = make([]string, len(*in))
+				copy(*out, *in)
+			}
+			(*out)[key] = outVal
 		}
 	}
 	if in.NumCpus != nil {

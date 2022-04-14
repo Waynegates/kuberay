@@ -43,13 +43,13 @@ type ServeConfigSpec struct {
 }
 
 type RayActorOptionSpec struct {
-	RuntimeEnv        map[string]string `json:"runtime_env,omitempty"`
-	NumCpus           *int32            `json:"num_cpus,omitempty"`
-	NumGpus           *int32            `json:"num_gpus,omitempty"`
-	Memory            *int32            `json:"memory,omitempty"`
-	ObjectStoreMemory *int32            `json:"object_store_memory,omitempty"`
-	Resources         map[string]string `json:"resources,omitempty"`
-	AcceleratorType   string            `json:"accelerator_type,omitempty"`
+	RuntimeEnv        map[string][]string `json:"runtime_env,omitempty"`
+	NumCpus           *int32              `json:"num_cpus,omitempty"`
+	NumGpus           *int32              `json:"num_gpus,omitempty"`
+	Memory            *int32              `json:"memory,omitempty"`
+	ObjectStoreMemory *int32              `json:"object_store_memory,omitempty"`
+	Resources         map[string]string   `json:"resources,omitempty"`
+	AcceleratorType   string              `json:"accelerator_type,omitempty"`
 }
 
 // ServingClusterSpec defines the desired state of ServingCluster

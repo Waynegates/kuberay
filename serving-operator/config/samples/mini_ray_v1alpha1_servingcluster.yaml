@@ -5,33 +5,31 @@ metadata:
 spec:
   serveConfigs:
     - name: shallow
-      init_args:
-        - "4"
-        - glue
-      init_kwargs:
-        fuel: diesel
-      import_path: test_env.shallow_import.ShallowClass
-      num_replicas: 2
+      import_path: "test_env.shallow_import.ShallowClass"
+      num_replicas: 1
       route_prefix: "/shallow"
-      max_concurrent_queries: 32
-      user_config:
-        threshold: "0.2"
-        pattern: rainbow
-      graceful_shutdown_wait_loop_s: 17
-      graceful_shutdown_timeout_s: 49
-      health_check_period_s: 11
-      health_check_timeout_s: 11
       ray_actor_options:
         runtime_env:
-          working_dir: https://github.com/shrekris-anyscale/
-          py_modules: https://github.com/shrekris-anyscale/
-        num_cpus: 3
-        num_gpus: 4
-        memory: 5
-        object_store_memory: 3
-        resources:
-          custom_asic: "8"
-        accelerator_type: NVIDIA_TESLA_P4
+          py_modules:
+            - "https://github.com/shrekris-anyscale/test_deploy_group/archive/HEAD.zip"
+            - "https://github.com/shrekris-anyscale/test_module/archive/HEAD.zip"
+    - name: deep
+      import_path: "test_env.subdir1.subdir2.deep_import.DeepClass"
+      num_replicas: 1
+      route_prefix: "/deep"
+      ray_actor_options:
+        runtime_env:
+          py_modules:
+            - "https://github.com/shrekris-anyscale/test_deploy_group/archive/HEAD.zip"
+            - "https://github.com/shrekris-anyscale/test_module/archive/HEAD.zip"
+    - name: one
+      import_path: "test_module.test.one"
+      num_replicas: 2
+      ray_actor_options:
+        runtime_env:
+          py_modules:
+            - "https://github.com/shrekris-anyscale/test_deploy_group/archive/HEAD.zip"
+            - "https://github.com/shrekris-anyscale/test_module/archive/HEAD.zip"
   # TODO(user): Add fields here
   rayClusterConfig:
     rayVersion: '1.8.0' # should match the Ray version in the image of the containers
@@ -71,8 +69,8 @@ spec:
         spec:
           containers:
             - name: ray-head
-              #image: rayproject/ray:1.12.0
-              image: rayproject/ray:nightly
+              image: rayproject/ray:1.12.0
+              #image: rayproject/ray:nightly
               #image: bonsaidev.azurecr.io/bonsai/lazer-0-9-0-cpu:dev
               env:
                 - name: MY_POD_IP
