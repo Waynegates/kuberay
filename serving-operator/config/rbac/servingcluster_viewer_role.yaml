@@ -1,0 +1,20 @@
+# permissions for end users to view servingclusters.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: servingcluster-viewer-role
+rules:
+- apiGroups:
+  - ray.io
+  resources:
+  - servingclusters
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ray.io
+  resources:
+  - servingclusters/status
+  verbs:
+  - get
